@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtractItemBuilderScoring", "ExtractItemBuilderScoring\ExtractItemBuilderScoring.csproj", "{84DC78BC-D703-4BC7-955E-20695538125A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IRTlibExtractItemBuilderScoring", "IRTlibExtractItemBuilderScoring\ExtractItemBuilderScoring.csproj", "{84DC78BC-D703-4BC7-955E-20695538125A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
