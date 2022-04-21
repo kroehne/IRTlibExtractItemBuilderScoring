@@ -61,6 +61,12 @@ namespace ExtractItemBuilderScoring
                     foreach (ZipArchiveEntry entry in archive.Entries)
                     {
                         if (entry.Name == "stimulus.json")
+                        if (entry.Name == _itemName + ".json")
+                        {
+                            // prior to 9.4
+                            _stimulus_file = _itemName + ".json";
+                        }
+                        else if (entry.Name == "stimulus.json")
                         {
                             // 9.4 and newer
                             _stimulus_file = "stimulus.json";
