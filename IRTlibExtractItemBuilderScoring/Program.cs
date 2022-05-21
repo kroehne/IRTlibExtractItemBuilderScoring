@@ -16,20 +16,20 @@ namespace ExtractItemBuilderScoring
     {
         static void Main(string[] args)
         {
-            string targetDirectory = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
-            string sourceDirectory = targetDirectory;
+            string sourceDirectory = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+            string targetFileOrDirectory = Path.Combine(sourceDirectory, "ScoringSummary.xlsx"); ;
+             
+            if (args.Length >= 0)
+                sourceDirectory = args[0];
 
+            if (args.Length >= 1)
+                targetFileOrDirectory = args[1];
+             
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("IRTlib: ExtractItemBuilderScoring ({0})\n", typeof(Program).Assembly.GetName().Version.ToString());
             Console.ResetColor();
             Console.WriteLine("- Source Directory: {0}", sourceDirectory);
-            Console.WriteLine("- Target Directory: {0}", targetDirectory);
-
-            if (args.Length > 0)
-                sourceDirectory = args[0];
-              
-            if (args.Length > 1)
-                targetDirectory = args[1];
+            Console.WriteLine("- Target Directory: {0}", targetFileOrDirectory);
 
             string _pattern = "*.zip";
             List<string> _files = new List<string>();
@@ -50,8 +50,7 @@ namespace ExtractItemBuilderScoring
                 int _itemSizeWidth = -1;
                 int _itemSizeHeight = -1;
                 List<string> _itemTasks = new List<string>();
-
-                
+                 
                 using (ZipArchive archive = ZipFile.OpenRead(_file))
                 {
                     Dictionary<string, string> _scoringResourcesCache = new Dictionary<string, string>();
@@ -60,7 +59,6 @@ namespace ExtractItemBuilderScoring
                     _itemName = Path.GetFileName(_file).Replace(".zip", "");
                     foreach (ZipArchiveEntry entry in archive.Entries)
                     {
-                        if (entry.Name == "stimulus.json")
                         if (entry.Name == _itemName + ".json")
                         {
                             // prior to 9.4
@@ -305,7 +303,7 @@ namespace ExtractItemBuilderScoring
 
                 }
 
-                FileStream sw = File.Create(Path.Combine(targetDirectory, "ScoringSummary.xlsx"));
+                FileStream sw = File.Create(targetFileOrDirectory);
                 _workbook.Write(sw);
                 sw.Close();
 
